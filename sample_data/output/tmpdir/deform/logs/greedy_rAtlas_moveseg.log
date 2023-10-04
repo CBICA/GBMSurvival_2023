@@ -1,0 +1,297 @@
+INFO: Conflicting module gcc/5.2.0 detected and automatically unloaded.
+
+INFO: Conflicting module gcc/5.2.0 detected and automatically unloaded.
+
+
+
+---> Loading BTpipeline_functions
+path: /cbica/software/lab/BTpipeline/2.0.4/bin/BTpipeline_functions.sh
+version: 2021.12.10
+
+
+
+---> Checking centos version
+OSrelease: centos7
+hostname: 2118ffn012
+centos_version:	(centos7)
+centos_version_short:	(centos7)
+user:	(garcijo)
+host:	(2118ffn012)
+
+
+---> Setting default modules
+Defining default modules for centos version (centos7) as verified on (20211210)
+
+---> Recording start time
+start_datetime: (20231004_170818059560943)
+start_date: (20231004)
+start_datetimeStamp: (1696453698)
+
+
+---> Creating temp directory
+TMPDIR (/scratch/garcijo/SGE_8934258) does exist.
+create_tmpdir: using (/scratch/garcijo/SGE_8934258)
+Created tmpdir (/scratch/garcijo/SGE_8934258/rGreedy_Deformable.zG5GCQ5iJZ)
+
+
+---> Printing system informaion
+centos_version_short	: centos7
+user			: garcijo
+host			: 2118ffn012
+CPU Model		: (Intel(R) Xeon(R) Gold 6130 CPU @ 2.10GHz)
+CPU Current Speed	: (2100.000 MHz)
+CPU Max Speed		: ( MHz)
+CPU L2 Cache		: (1024K)
+CPU L3 Cache		: (22528K)
+CPU Threads		: (0-63)
+CPU Flags		: (fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch epb cat_l3 cdp_l3 invpcid_single intel_ppin intel_pt ssbd mba ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm cqm mpx rdt_a avx512f avx512dq rdseed adx smap clflushopt clwb avx512cd avx512bw avx512vl xsaveopt xsavec xgetbv1 cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local dtherm ida arat pln pts hwp_epp pku ospke md_clear spec_ctrl intel_stibp flush_l1d arch_capabilities)
+GPU Model		: (58:00.0 3D controller: NVIDIA Corporation GA102GL [A40] (rev a1))
+Mem Online		: (768G)
+Mem offline		: (0B)
+
+
+
+---> SGE Environment Variables
+centos_version_short: (centos7)
+OSrelease: (centos7)
+CBICA_TMPDIR: (/scratch/garcijo/SGE_8934258)
+TMPDIR: (/scratch/garcijo/SGE_8934258)
+MATLABDIR: (/cbica/software/external/matlab/R2018A)
+HOSTNAME: (2118ffn012)
+QUEUE: (all.q)
+JOB_ID: (8934258)
+JOB_NAME: (rGreedy_Deformable)
+USER: (garcijo)
+ARCH: (Intel-Xeon)
+arch: (x86_64)
+
+---> Displaying Additional Information about the sge environment.
+ARC: (lx-amd64)
+BASH_ENV: (/cbica/software/external/Modules/4.1.2/init/bash)
+BASH_VERSION: (4.2.46(2)-release)
+BASH_VERSINFO: (4)
+CUDA_DIR: (/usr/local/cuda-11.2)
+CUDA_PATH: (/usr/local/cuda-11.2)
+CUDA_VER: (11.2)
+DISPLAY: ()
+HOME: (/cbica/home/garcijo)
+HOSTTYPE: (x86_64)
+SGE_CELL: (default)
+SGE_O_HOME: (/cbica/home/garcijo)
+SGE_O_HOST: (211affn012)
+SGE_O_LOGNAME: (garcijo)
+SGE_O_MAIL: (/var/spool/mail/garcijo)
+SGE_O_PATH: (/cbica/software/lab/captk/1.9.0:/cbica/software/external/fsl/centos7/5.0.11/bin:/cbica/software/lab/BTpipeline/2.0.4/bin:/cbica/software/lab/bin:/cbica/software/external/bin:/cbica/software/external/gcc/centos7/5.2.0/bin:/usr/lib64/openmpi/bin:/cbica/software/external/python/anaconda/3/bin:/cbica/software/lab/MUSE/centos7/3.0.5/bin:/cbica/software/lab/MARS/centos7/2.2.2/bin:/cbica/software/external/imagej:/cbica/software/external/dcmtk/centos7/3.6.3/bin:/cbica/software/external/gdcm/centos7/2.6.1/bin:/cbica/software/lab/SCPLearn/centos7/1.0.0:/cbica/software/external/swig/centos7/3.0.5/bin:/cbica/software/lab/dramms/centos7/1.4.2/bin:/cbica/software/lab/odvba/centos7/3.0/bin:/cbica/software/external/mricron/7.7.12:/cbica/software/external/afni/17.2.10:/cbica/software/external/freesurfer/centos7/5.3.0/bin:/cbica/software/external/nifticlib/2.0.0/bin:/cbica/software/lab/sbiaDti/253/bin:/cbica/software/lab/sbiaUtilities/0.3.3/centos7/bin:/cbica/software/external/matlab/R2018A/bin:/cbica/software/external/camino/1176/bin:/cbica/software/external/mipav/7.2.0:/cbica/software/external/minc/2.0.13/bin:/cbica/software/lab/mass/1.1.1/bin:/cbica/software/external/dtk/0.6:/cbica/software/external/dicom3tools/1.00.snapshot.20110207/bin:/cbica/software/lab/libra/centos7/1.0.4:/cbica/software/external/dependency_bundle/centos7/3817/bin:/cbica/software/external/ANTs/centos7/2.3.1/bin:/cbica/software/external/qt/centos7/5.11.1/Tools/QtInstallerFramework/3.0/bin:/cbica/software/external/qt/centos7/5.11.1/Tools/QtInstallerFramework/2.0/bin:/cbica/software/external/qt/centos7/5.11.1/Tools/QtCreator/bin:/cbica/software/external/qt/centos7/5.11.1/5.11.1/gcc_64/bin:/cbica/software/external/doxygen/centos7/1.8.9.1/bin:/cbica/software/external/texlive/2016/bin/x86_64-linux:/cbica/software/external/texlive/2016/bin:/cbica/software/external/jython/centos7/2.5.3/bin:/cbica/software/external/sge/8.1.9-1/bin/lx-amd64:/cbica/software/external/sge/8.1.9-1/bin:/cbica/software/lab/mico/1.0.0/centos7/bin:/usr/local/cuda-11.2/bin:/cbica/software/external/slicer/centos7/4.8.1:/cbica/software/external/python/anaconda/3/condabin:/usr/lib64/qt-3.3/bin:/cbica/home/garcijo/perl5/bin:/usr/lib64/ccache:/cbica/software/external/Modules/4.1.2/bin:/scratch/8934254.1.all.q:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/usr/local/bin:/usr/lpp/mmfs/bin:/opt/puppetlabs/bin:/usr/local/bin:/usr/local/bin:/usr/local/bin)
+SGE_O_TZ: ()
+SGE_O_WORKDIR: (/gpfs/fs001/cbica/home/garcijo/20231004_sample_data/UPENN-GBM-00006_11)
+SGE_STDERR_PATH: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/logs/greedy_rAtlas_moveseg.log)
+SGE_STDOUT_PATH: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/logs/greedy_rAtlas_moveseg.log)
+SGE_TASK_ID: (undefined)
+LOGNAME: (garcijo)
+NHOSTS: (1)
+NQUEUES: (1)
+NSLOTS: (1)
+OS: (centos)
+OSmajrelease: (7)
+OSrelease: (centos7)
+OSTYPE: (linux-gnu)
+PE: ()
+PE_HOSTFILE: ()
+QUEUE: (all.q)
+REQUEST: (rGreedy_Deformable)
+TASK_ID: ()
+TMPDIR: (/scratch/garcijo/SGE_8934258)
+TZ: ()
+UID: (25722)
+Check https://docs.oracle.com/cd/E19957-01/820-0699/chp4-21/index.html for further help with SGE qsub environment variables.
+
+
+VERBOSE Mode on
+
+---> Checking if required input arguments were given
+---> exit_if_blank
+argument_name: (input)
+argument_value: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/seg/segmSRI_user.nii.gz)
+---> exit_if_blank
+argument_name: (output)
+argument_value: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_segm_rdAtlas.nii.gz)
+---> exit_if_blank
+argument_name: (atlas)
+argument_value: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/ipp_survival_respond23/bin/data/jakob_atlas/jakob_stripped_with_cere_lps_256256128.nii.gz)
+---> exit_if_blank
+argument_name: (output_affine_mat)
+argument_value: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_t1_20toAtlas.mat)
+---> exit_if_blank
+argument_name: (output_deform_field)
+argument_value: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_t1_20toAtlas_deformfield.nii.gz)
+
+---> Checking if path to files have correct, expected extensions.
+
+
+---> check_extension
+---> file: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/seg/segmSRI_user.nii.gz)
+---> extension1: (gz)
+---> extension2: (nii)
+---> file_basename: (segmSRI_user.nii.gz)
+---> file_directory: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/seg)
+---> file_extension1: (gz)
+---> file_no_extension1: (segmSRI_user.nii)
+---> file_extension2: (nii)
+---> file_no_extension2: (segmSRI_user)
+
+
+
+
+---> check_extension
+---> file: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_segm_rdAtlas.nii.gz)
+---> extension1: (gz)
+---> extension2: (nii)
+---> file_basename: (sub_segm_rdAtlas.nii.gz)
+---> file_directory: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform)
+---> file_extension1: (gz)
+---> file_no_extension1: (sub_segm_rdAtlas.nii)
+---> file_extension2: (nii)
+---> file_no_extension2: (sub_segm_rdAtlas)
+
+
+
+
+---> check_extension
+---> file: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/ipp_survival_respond23/bin/data/jakob_atlas/jakob_stripped_with_cere_lps_256256128.nii.gz)
+---> extension1: (gz)
+---> extension2: (nii)
+---> file_basename: (jakob_stripped_with_cere_lps_256256128.nii.gz)
+---> file_directory: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/ipp_survival_respond23/bin/data/jakob_atlas)
+---> file_extension1: (gz)
+---> file_no_extension1: (jakob_stripped_with_cere_lps_256256128.nii)
+---> file_extension2: (nii)
+---> file_no_extension2: (jakob_stripped_with_cere_lps_256256128)
+
+
+
+
+---> check_extension
+---> file: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_t1_20toAtlas_deformfield.nii.gz)
+---> extension1: (gz)
+---> extension2: (nii)
+---> file_basename: (sub_t1_20toAtlas_deformfield.nii.gz)
+---> file_directory: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform)
+---> file_extension1: (gz)
+---> file_no_extension1: (sub_t1_20toAtlas_deformfield.nii)
+---> file_extension2: (nii)
+---> file_no_extension2: (sub_t1_20toAtlas_deformfield)
+
+
+
+
+---> check_extension
+---> file: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_t1_20toAtlas.mat)
+---> extension1: (mat)
+---> file_basename: (sub_t1_20toAtlas.mat)
+---> file_directory: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform)
+---> file_extension1: (mat)
+---> file_no_extension1: (sub_t1_20toAtlas)
+---> file_extension2: (sub_t1_20toAtlas)
+---> file_no_extension2: (sub_t1_20toAtlas)
+
+
+
+---> Checking if output file already exists
+---> exit_if_exist
+file: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_segm_rdAtlas.nii.gz)
+
+---> Checking if output directory does not exist
+---> exit_if_not_exist_dir
+dir: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform)
+
+---> Checking if input file exists
+---> exit_if_not_exist
+file: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/seg/segmSRI_user.nii.gz)
+file (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/seg/segmSRI_user.nii.gz) exists and is a regular file.
+---> exit_if_not_exist
+file: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/ipp_survival_respond23/bin/data/jakob_atlas/jakob_stripped_with_cere_lps_256256128.nii.gz)
+file (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/ipp_survival_respond23/bin/data/jakob_atlas/jakob_stripped_with_cere_lps_256256128.nii.gz) exists and is a regular file.
+---> exit_if_not_exist
+file: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_t1_20toAtlas_deformfield.nii.gz)
+file (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_t1_20toAtlas_deformfield.nii.gz) exists and is a regular file.
+---> exit_if_not_exist
+file: (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_t1_20toAtlas.mat)
+file (/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_t1_20toAtlas.mat) exists and is a regular file.
+
+---> Checking module and executable availability
+
+---> Module Load: greedy
+Input parameters:
+module_parent: (greedy)
+module_default: (greedy/c6dca2e)
+module: ()
+executable_basename: (greedy)
+executable_default: (/cbica/software/external/greedy/centos7/c6dca2e/bin/greedy)
+executable: ()
+> module unload greedy
+> module load greedy/c6dca2e
+executable=/cbica/software/external/greedy/centos7/c6dca2e/bin/greedy
+---> exit_if_not_exist
+file: (/cbica/software/external/greedy/centos7/c6dca2e/bin/greedy)
+file (/cbica/software/external/greedy/centos7/c6dca2e/bin/greedy) exists and is a regular file.
+
+---> current_datetime: (20231004_170818775462350)
+---> current_date: (20231004)
+---> current_datetimeStamp: (1696453698)
+
+
+
+
+---> Listing all arguments and paths
+script_path:	(/var/tmp/gridengine/8.1.9-1/default/spool/2118ffn012/job_scripts/8934258)
+code version:	(2022.08.25)
+code start time:	(20231004_170818059560943)
+current time:	(20231004_170818775462350)
+tmpdir:	(/scratch/garcijo/SGE_8934258/rGreedy_Deformable.zG5GCQ5iJZ)
+VERBOSE:	(1)
+input:	(/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/seg/segmSRI_user.nii.gz)
+atlas:	(/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/ipp_survival_respond23/bin/data/jakob_atlas/jakob_stripped_with_cere_lps_256256128.nii.gz)
+outdir:	(/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform)
+output:	(/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_segm_rdAtlas.nii.gz)
+output_affine_mat:	(/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_t1_20toAtlas.mat)
+output_deform_field:	(/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_t1_20toAtlas_deformfield.nii.gz)
+greedy_executable:	(/cbica/software/external/greedy/centos7/c6dca2e/bin/greedy)
+apply existing (no optimization):	(1)
+apply existing inverse (deform then affine):	(0)
+
+############### start processing ################
+
+
+---> copying input files to tmpdir (/scratch/garcijo/SGE_8934258/rGreedy_Deformable.zG5GCQ5iJZ)
+
+> cp -L /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/seg/segmSRI_user.nii.gz /scratch/garcijo/SGE_8934258/rGreedy_Deformable.zG5GCQ5iJZ/input.nii.gz
+
+> cp -L /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/ipp_survival_respond23/bin/data/jakob_atlas/jakob_stripped_with_cere_lps_256256128.nii.gz /scratch/garcijo/SGE_8934258/rGreedy_Deformable.zG5GCQ5iJZ/atlas.nii.gz
+
+---> Moving input image to reference, using deformation field and affine matrix ...
+
+
+> /cbica/software/external/greedy/centos7/c6dca2e/bin/greedy            -d 3 -threads 1 	   -rf /scratch/garcijo/SGE_8934258/rGreedy_Deformable.zG5GCQ5iJZ/atlas.nii.gz 	   -ri NN 	   -rm /scratch/garcijo/SGE_8934258/rGreedy_Deformable.zG5GCQ5iJZ/input.nii.gz /scratch/garcijo/SGE_8934258/rGreedy_Deformable.zG5GCQ5iJZ/output.nii.gz 	   -r /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_t1_20toAtlas_deformfield.nii.gz /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_t1_20toAtlas.mat
+Limiting the number of threads to 1
+
+> cp -L /scratch/garcijo/SGE_8934258/rGreedy_Deformable.zG5GCQ5iJZ/output.nii.gz /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_segm_rdAtlas.nii.gz
+
+---> end_datetime: (20231004_170822806661333)
+---> end_date: (20231004)
+
+---> end_datetimeStamp: (1696453702)
+
+
+---> Execution Time Calculation from start_datetime (20231004_170818059560943) to end_datetime (20231004_170822806661333)
+
+Execution time:	0m 4s.
+
+
+---> current_datetime: (20231004_170822813246610)
+---> current_date: (20231004)
+---> current_datetimeStamp: (1696453702)
+
+
+20231004_170822813246610 - Command [ set +e ] exited with status [ 0 ]
+
+Removing temporary directory : /scratch/garcijo/SGE_8934258/rGreedy_Deformable.zG5GCQ5iJZ

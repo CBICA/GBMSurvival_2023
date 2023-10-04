@@ -1,0 +1,114 @@
+INFO: Conflicting module gcc/5.2.0 detected and automatically unloaded.
+
+INFO: Conflicting module gcc/5.2.0 detected and automatically unloaded.
+
+
+################################################
+Survival Inference code - 2022 ReSPOND model
+[reference]
+Version: 2022.09.29
+#################################################
+VERBOSE mode on
+
+---> Initial checks
+
+Input type 2 : Preprocessed input, will not run BraTSpipeline.
+
+Checking preprocessed input image..
+
+Finished checks.
+
+---> User input
+input type:	(2)
+user description:	(UPENN-GBM-00006_11)
+age:	(52.99)
+t1:	(UPENN-GBM-00006_11_T1.nii.gz)
+t1ce:	(UPENN-GBM-00006_11_T1GD.nii.gz)
+t2:	(UPENN-GBM-00006_11_T2.nii.gz)
+flair:	(UPENN-GBM-00006_11_FLAIR.nii.gz)
+user tumor segm:	(UPENN-GBM-00006_11_SEG.nii.gz)
+brainmage option (0:t1ce,1:t1):	(0)
+deepmedic only (0:no use fets,1:yes):	(0)
+user tmpdir:	()
+ippoutdir:	(/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11)
+scriptdir:	(/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/ipp_survival_respond23/bin)
+
+---> Loading modules, BTpipeline/2.0.4, fsl/5.0.11, captk/1.9.0
+
+Setup tmpdir
+tmpdir:/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir
+
+---> Preprocessed Images to be used:
+t1:/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/images/T1/T1_to_SRI_brain.nii.gz
+t1ce:/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/images/T1CE/T1CE_to_SRI_brain.nii.gz
+t2:/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/images/T2/T2_to_SRI_brain.nii.gz
+flair:/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/images/FL/FL_to_SRI_brain.nii.gz
+mask:
+
+---> Tumor segmentation
+seg:/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/seg/segmSRI_user.nii.gz
+
+---> Segmentation finished. Images to be used:
+t1:/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/images/T1/T1_to_SRI_brain.nii.gz
+t1ce:/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/images/T1CE/T1CE_to_SRI_brain.nii.gz
+t2:/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/images/T2/T2_to_SRI_brain.nii.gz
+flair:/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/images/FL/FL_to_SRI_brain.nii.gz
+mask:
+seg:/cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/seg/segmSRI_user.nii.gz
+
+---> Check on TC size.
+
+TC size:15458
+
+---> Deformable Registration to Common atlas
+
+checking t1 intensity range
+0.000000 771.000000 
+all positive values. continuing.
+
+get .mat and deformation field
+
+qsub -v BTpipelineDIR=/cbica/software/lab/BTpipeline/2.0.4 -terse -j y -o /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/logs/greedy_rAtlas_register.log             /cbica/software/lab/BTpipeline/2.0.4/bin/run_Greedy_Deform.sh             -i /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/images/T1/T1_to_SRI_brain.nii.gz             -r /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/ipp_survival_respond23/bin/data/jakob_atlas/jakob_stripped_with_cere_lps_256256128.nii.gz             -m /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_t1_20toAtlas.mat             -d /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_t1_20toAtlas_deformfield.nii.gz             -o /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_t1_rdAtlas.nii.gz             -V
+jid: 8934255
+
+move seg to atlas
+
+qsub -v BTpipelineDIR=/cbica/software/lab/BTpipeline/2.0.4 -hold_jid 8934255 -terse -j y -o /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/logs/greedy_rAtlas_moveseg.log             /cbica/software/lab/BTpipeline/2.0.4/bin/run_Greedy_Deform.sh                  -a                  -i /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/seg/segmSRI_user.nii.gz                  -r /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/ipp_survival_respond23/bin/data/jakob_atlas/jakob_stripped_with_cere_lps_256256128.nii.gz                  -m /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_t1_20toAtlas.mat                  -d /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_t1_20toAtlas_deformfield.nii.gz                  -o /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_segm_rdAtlas.nii.gz                  -p NN                  -V
+jid: 8934258
+
+get tumor core from seg in atlas
+
+qsub  -hold_jid 8934255 -hold_jid 8934258 -terse -j y -b y -o /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/logs/tc_3dcalc.log                /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/ipp_survival_respond23/bin/link_3dcalc -a /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_segm_rdAtlas.nii.gz -expr 'iszero(a-1)+iszero(a-4)' -prefix /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_segm_rdAtlas_TC.nii.gz
+jid: 8934262
+
+
+move atlas segm to patient space (in SRI)
+
+qsub -v BTpipelineDIR=/cbica/software/lab/BTpipeline/2.0.4 -hold_jid 8934255 -terse -j y -o /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/logs/greedy_deform_move_atlassegm_to_SRI.log                /cbica/software/lab/BTpipeline/2.0.4/bin/run_Greedy_Deform.sh                  -a -b                  -i /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/ipp_survival_respond23/bin/data/jakob_atlas/templateallregions.nii.gz                  -r /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/images/T1/T1_to_SRI_brain.nii.gz                  -m /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_t1_20toAtlas.mat,-1                  -d /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_t1_20toAtlas_deformfield_inv.nii.gz                  -o /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_atlassegm_rSRI.nii.gz                  -p NN                  -V
+jid: 8934263
+get VT segm (from atlas) in patient space (in SRI)
+
+qsub -hold_jid 8934255 -hold_jid 8934263 -terse -l h_vmem=4G -b y -j y -o /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/vt_3dcalc.log                 /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/ipp_survival_respond23/bin/link_3dcalc                 -a /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_atlassegm_rSRI.nii.gz -expr 'iszero(a-3)+iszero(a-8)'                 -prefix /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_atlasVT_rSRI.nii.gz
+jid: 8934264
+
+
+Finished deformation to common atlas
+
+
+---> Input to feature extraction
+Tumor Core in Jacob atlas: /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_segm_rdAtlas_TC.nii.gz
+Segm in SRI: /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/seg/segmSRI_user.nii.gz
+Atlas VT segm in SRI: /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_atlasVT_rSRI.nii.gz
+t1ce: /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/images/T1CE/T1CE_to_SRI_brain.nii.gz
+
+---> Feature Extraction and Prediction
+
+qsub -hold_jid 8934255 -hold_jid 8934263 -hold_jid 8934264 -terse -l h_vmem=12G -j y -o /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/ML/ml.log    	  /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/ipp_survival_respond23/bin/run_matlabexec_2018a.sh /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/ipp_survival_respond23/bin/ML/GBMSurvival_staging22 	  52.99 	  /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_segm_rdAtlas_TC.nii.gz 	  /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/seg/segmSRI_user.nii.gz 	  /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_atlasVT_rSRI.nii.gz 	  /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/images/T1CE/T1CE_to_SRI_brain.nii.gz 	  /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/ipp_survival_respond23/bin/data/model/Atlas_Sur_NatMed.nii.gz 	  /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/ML 	  /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/ipp_survival_respond23/bin/data/model/Trained_ReSPOND_NatMedRev1.mat
+jid: 8934265
+
+---> Output report
+
+qsub -terse -j y -o /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/Report/report.log -b y -l h_vmem=8G            /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/ipp_survival_respond23/bin/libs/python38_gbmsurvival22/bin/python /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/ipp_survival_respond23/bin/GBMsurvival_report.py             -n 'UPENN-GBM-00006_11' 	    -t /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/images/T1/T1_to_SRI_brain.nii.gz             -c /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/images/T1CE/T1CE_to_SRI_brain.nii.gz     	    -w /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/images/T2/T2_to_SRI_brain.nii.gz     	    -f /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/images/FL/FL_to_SRI_brain.nii.gz 	     	    -s /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/seg/segmSRI_user.nii.gz             --segtype 0 	    -a 0 -e /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/ML/features.csv -r /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/ML/results.csv --tcinatlas /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_segm_rdAtlas_TC.nii.gz             --modeldir /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/ipp_survival_respond23/bin/data/model 	    -o /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/Report
+jid: 8934267
+
+Finished.
