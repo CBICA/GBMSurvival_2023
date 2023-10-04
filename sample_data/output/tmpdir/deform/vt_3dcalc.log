@@ -1,8 +1,0 @@
-INFO: Conflicting module gcc/5.2.0 detected and automatically unloaded.
-
-INFO: Conflicting module gcc/5.2.0 detected and automatically unloaded.
-
-++ 3dcalc: AFNI version=AFNI_17.2.10 (Aug 30 2017) [64-bit]
-++ Authored by: A cast of thousands
-++ WARNING: file /cbica/home/garcijo/.afni.log is now 850627426 (851 million [mega]) bytes long!
-++ Output dataset /cbica/home/garcijo/Brain_Tumor/Projects/ReSPOND_survival_validation/Results/20231004_validation/UPENN-GBM-00006_11/tmpdir/deform/sub_atlasVT_rSRI.nii.gz
