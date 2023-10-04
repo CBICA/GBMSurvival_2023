@@ -14,10 +14,10 @@ Inputs are patient age, preprocessed MRI images (t1,t1gd,t2,t2-flair) and the tu
 
 - src/GBMSurvival_predict.m : matlab code to extract featuers and run predictions
 
-- data/: folder including model and atlas
-- libs/: folder including matlab libraries
+- src/data: folder including model and atlas
+- src/libs: folder including matlab libraries
 
-Code dependencies:
+software requirements
 
 - MATLAB version 9.4 (R2018a)
 - greedy: https://github.com/pyushkevich/greedy [1]
