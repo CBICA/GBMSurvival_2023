@@ -18,16 +18,34 @@ echoV()
         echo -e $1;
     fi;
 }
+remove_tmpdir()
+{
+    if ((keep_tmpdir==0)); then rm -rf $tmpdir; fi
+}
+checkandexit()
+{
+    # Check the supplied value, typically the return value from the
+    # previous command. If the return value is not 0, then print a 
+    # message to STDERR and exit.
+    if [ $1 != 0 ]; then
+        echoV "\ncheckandexit: dollar_one = ($1)";
+        /bin/echo "$2" 1>&2;
+        if [ -d $ippoutdir/tmpdir ]; then remove_tmpdir; fi
+        exit "$1";
+    fi;
+}
+
+
 
 
 function Help {
     cat <<EOF
 
 Input:
- (1) registered skull-stripped images and tumor segm
+  co-registered skull-stripped nifti images and tumor segm
 
 Steps:
- (1) Deformably registser to Jacob atlas. 
+ (1) Deformably registser to common atlas. 
           Check of negative intensity. Since greedy deform will fail if intensity<0, shift intensify if negative. (only for getting deformation)
           Feature extration will use
           - TC segm in atlas
@@ -36,14 +54,25 @@ Steps:
  (2) Extract features
           - check features with respond distribution. print out in table. If outlier, flag and say results may not be reliable.
 
- (3) Apply respond model
+ (3) Apply ReSPOND model
 
  (4) Print out results to pdf
 
+Usage:
+
+Compulsory arguments:
+  -n     User description, to be shown in report
+  -a     patient age
+  -t     preprocessed t1 input 
+  -c     preprocessed t1gd input
+  -w     preprocessed t2 input
+  -f     preprocessed flair input  
+  -s     tumor segm
+  -o     output dir
 
 Options for local debugging purposes
   -p     Don't remove tmpdir (to save intermediate results)
-  -S     scriptdir (location of script. Default is /cbica/home/IPP/GBMSurvival22/bin)
+  -S     scriptdir
   -V     VERBOSE mode on
   -h     Show help
 
@@ -61,7 +90,6 @@ flag_noTC=0
 age=;
 
 ### folder for subscripts
-#scriptdir=/cbica/projects/brain_tumor_external/IPP_symlink/GBMSurvival22/bin
 scriptdir=./
 
 ##############################################################################
@@ -177,6 +205,19 @@ copy_to_ippoutdir()
     
 }
 
+checkandexit()
+{
+    # Check the supplied value, typically the return value from the previous command. If the return value is not 0, then print a message to STDERR and exit.
+    ####sample usge: checkandexit $? "ERROR MESSAGE!";
+    if [ $1 != 0 ];
+    then
+        # There was an error, bail out!
+        echo -e "$2" 1>&2;
+        exit $1;
+    fi;
+    # help: after running a function/command, write the following command to catch any errorneous exit messages (!= 0) and exit with error message follwing in quotes
+}
+
 
 # mandatory input
 exit_if_blank "$age" "age"
@@ -192,6 +233,8 @@ for f in $t1 $t2 $t1ce $flair $seg; do
 done
 exit_if_not_exist_dir $ippoutdir
 
+
+echo $t1
 check_sri $t1
 check_sri $t1ce
 check_sri $t2
@@ -218,12 +261,14 @@ echoV "scriptdir:\t($scriptdir)"
 
 
 ### paths
-atlas=$scriptdir/data/jakob_atlas/jakob_stripped_with_cere_lps_256256128.nii.gz
-atlassegm=$scriptdir/data/jakob_atlas/templateallregions.nii.gz
-atlasstaging=$scriptdir/data/model/Atlas_Sur_NatMed.nii.gz
-modelmat=$scriptdir/data/model/Trained_ReSPOND_NatMedRev1.mat
+atlas=$scriptdir/data/jakob_stripped_with_cere_lps_256256128.nii.gz
+atlassegm=$scriptdir/data/templateallregions.nii.gz
+atlasstaging=$scriptdir/data/Atlas_Sur_NatMed.nii.gz
+modelmat=$scriptdir/data/Trained_ReSPOND_NatMedRev1.mat
+greedyscript=$scriptdir/run_Greedy_Deform.sh
+pythonexec=`which python`
 
-pythonexec=$scriptdir/libs/python38_gbmsurvival22/bin/python
+echo $pythonexec
 
 ###############################################################
 # set tmpdir inside ippoutdir
@@ -286,7 +331,6 @@ if (( flag_noTC == 0 )); then
 	else
 	    tmpmask=$mask
 	fi
-	echoV "$link3dcalc -a $t1 -b $tmpmask -expr 'b*(a-('${t1min}'))' -prefix $t1use"
 	3dcalc -a $t1 -b $tmpmask -expr 'b*(a-('${t1min}'))' -prefix $t1use
 	if [ ! -f $t1use ]; then
 	    echo -e "\nshifting intensity failed. Exiting."
@@ -314,8 +358,7 @@ if (( flag_noTC == 0 )); then
     echo -e "\nget .mat and deformation field"
     if [[ ! -f $fmat || ! -f $fdeform ]]; then
 	logfile=$logdir/greedy_rAtlas_register.log
-	cmd="qsub ${qsubenvoption} -terse -j y -o $logfile \
-            $greedyscript \
+	cmd="$greedyscript \
             -i $t1use \
             -r $atlas \
             -m $fmat \
@@ -323,10 +366,8 @@ if (( flag_noTC == 0 )); then
             -o $ft1_out \
             -V"
 	echoV "\n$cmd"
-	jid=$($cmd)
-	hold_deform1="-hold_jid $jid"
-	echoV "jid: $jid"
-	while [ -n "`qstat | grep $jid`" ]; do sleep 2m; done
+        $cmd > $logfile
+
 	if [[ ! -f $fmat || ! -f $fdeform  ]]; then
 	    echo -e "\nGreedy deform to common atlas failed. Exiting."
 	    copy_to_ippoutdir $logfile "Logs/`basename $logfile`"
@@ -338,8 +379,7 @@ if (( flag_noTC == 0 )); then
     echo -e "\nmove seg to atlas"
     if [ ! -f $fseg_out ]; then
 	logfile=$logdir/greedy_rAtlas_moveseg.log
-	cmd="qsub ${qsubenvoption} $hold_deform1 -terse -j y -o $logfile \
-            $greedyscript \
+	cmd="$greedyscript \
                  -a \
                  -i $seg \
                  -r $atlas \
@@ -349,10 +389,7 @@ if (( flag_noTC == 0 )); then
                  -p NN \
                  -V"
 	echoV "\n$cmd"
-	jid=$($cmd)
-	hold_deform2="$hold_deform1 -hold_jid $jid"
-	echoV "jid: $jid"
-	while [ -n "`qstat | grep $jid`" ]; do sleep 2m; done
+	$cmd > $logfile
 	if [ ! -f $fseg_out ]; then
 	    echo -e "\nGreedy deform, moving segm to common atlas failed. Exiting."
 	    copy_to_ippoutdir $logfile "Logs/`basename $logfile`"
@@ -364,13 +401,8 @@ if (( flag_noTC == 0 )); then
     echo -e "\nget tumor core from seg in atlas"
     if [ ! -f $fseg_outtc ]; then
 	logfile=$logdir/tc_3dcalc.log 
-	cmd="qsub  $hold_deform2 -terse -j y -b y -o $logfile \
-               $link3dcalc -a $fseg_out -expr 'iszero(a-1)+iszero(a-4)' -prefix $fseg_outtc"
-	echoV "\n$cmd"
-	jid=$($cmd)
-	hold_deform2="$hold_deform2 -hold_jid $jid"
-	echoV "jid: $jid"
-	while [ -n "`qstat | grep $jid`" ]; do sleep 2m; done
+	echo "3dcalc -a $fseg_out -expr 'iszero(a-1)+iszero(a-4)' -prefix $fseg_outtc"
+	3dcalc -a $fseg_out -expr 'iszero(a-1)+iszero(a-4)' -prefix $fseg_outtc > $logfile
 	if [ ! -f $fseg_outtc ]; then
 	    echo -e "\nGreedy deform step, 3dcalc to get TC segm failed. Exiting."
 	    copy_to_ippoutdir $logfile "Logs/`basename $logfile`"
@@ -384,8 +416,7 @@ if (( flag_noTC == 0 )); then
     echo -e "\nmove atlas segm to patient space (in SRI)" 
     if [[ ! -f $atlassegm_out ]]; then
 	logfile=$logdir/greedy_deform_move_atlassegm_to_SRI.log
-	cmd="qsub ${qsubenvoption} $hold_deform1 -terse -j y -o $logfile \
-               $greedyscript \
+	cmd="$greedyscript \
                  -a -b \
                  -i $atlassegm \
                  -r $t1 \
@@ -396,12 +427,9 @@ if (( flag_noTC == 0 )); then
                  -V"
 
 	echoV "\n$cmd"
-	jid=$($cmd)
-	hold_deform1="$hold_deform1 -hold_jid $jid"
-	echoV "jid: $jid"
-	while [ -n "`qstat | grep $jid`" ]; do sleep 2m; done
+	$cmd > $logfile
 	if [ ! -f $atlassegm_out ]; then
-	    echo -e "\nGreedy deform step, 3dcalc to get TC segm failed. Exiting."
+	    echo -e "\nGreedy deform step, move atlas segm to patient space failed. Exiting."
 	    copy_to_ippoutdir $logfile "Logs/`basename $logfile`"
 	    remove_tmpdir;	
 	    exit 1;
@@ -412,15 +440,11 @@ if (( flag_noTC == 0 )); then
     echo -e "get VT segm (from atlas) in patient space (in SRI)"    
     if [ ! -f $atlasVT_out ]; then
 	logfile=$outdir/vt_3dcalc.log
-	cmd="qsub $hold_deform1 -terse -l h_vmem=4G -b y -j y -o $logfile \
-                $link3dcalc \
+	cmd="3dcalc
                 -a $atlassegm_out -expr 'iszero(a-3)+iszero(a-8)' \
                 -prefix $atlasVT_out"
 	echoV "\n$cmd"
-	jid=$($cmd)
-	hold_deform1="$hold_deform1 -hold_jid $jid"
-	echoV "jid: $jid"
-	while [ -n "`qstat | grep $jid`" ]; do sleep 2m; done
+	3dcalc -a $atlassegm_out -expr 'iszero(a-3)+iszero(a-8)' -prefix $atlasVT_out
 	if [ ! -f $atlasVT_out ]; then
 	    echo -e "\nGreedy deform step, 3dcalc to get VT segm failed. Exiting."
 	    copy_to_ippoutdir $logfile "Logs/`basename $logfile`"
@@ -450,10 +474,10 @@ if (( flag_noTC == 0 )); then
     checkandexit $? "Creation of FE/ML output dir failed"
 
     fout=$outdir/results.csv
+    echo $fout
     if [ ! -f $fout ]; then
 	logfile=$outdir/ml.log
-	cmd="qsub $hold_deform1 -terse -l h_vmem=12G -j y -o $logfile \
-   	  $scriptdir/run_matlabexec_2018a.sh $scriptdir/ML/GBMSurvival_predict \
+	cmd="$scriptdir/run_matlabexec_2018a.sh $scriptdir/GBMSurvival_predict \
 	  $age \
 	  $fseg_outtc \
 	  $seg \
@@ -463,9 +487,7 @@ if (( flag_noTC == 0 )); then
 	  $outdir \
 	  $modelmat"
 	echoV "\n$cmd"
-	jid=$($cmd)
-	echoV "jid: $jid"
-	while [ -n "`qstat | grep $jid`" ]; do sleep 2m; done
+	$cmd > $logfile
     fi
     if [ ! -f $fout ]; then
 	echo -e "\nFeature Extraction/ML failed"
@@ -489,23 +511,17 @@ outdir=$tmpdir/Report
 mkdir -p $outdir
 checkandexit $? "Creation of Report output dir failed"
 
-if (( user_brainmask == 0 && inputtype == 2 )); then
+#if (( user_brainmask == 0 && inputtype == 2 )); then
     maskoption=""
-else
-    t1=$ippoutdir/images/T1/T1_to_SRI.nii.gz
-    t1ce=$ippoutdir/images/T1CE/T1CE_to_SRI.nii.gz
-    t2=$ippoutdir/images/T2/T2_to_SRI.nii.gz
-    flair=$ippoutdir/images/FL/FL_to_SRI.nii.gz
-    maskoption="-m $mask"
-fi
+#else
+#    t1=$ippoutdir/images/T1/T1_to_SRI.nii.gz
+#    t1ce=$ippoutdir/images/T1CE/T1CE_to_SRI.nii.gz
+#    t2=$ippoutdir/images/T2/T2_to_SRI.nii.gz
+#    flair=$ippoutdir/images/FL/FL_to_SRI.nii.gz
+#    maskoption="-m $mask"
+#fi
 
-if (( user_seg == 1 )); then
-    segtype="0"  #user
-elif (( use_deepmedic == 1 )); then
-    segtype="1"  #DM
-else
-    segtype="2"  #FeTS
-fi
+segtype="0"  #user
 
 
 if (( flag_noTC == 0 )); then
@@ -517,8 +533,7 @@ fi
 fout=$outdir/report.pdf
 if [ ! -f $fout ]; then
     logfile=$outdir/report.log
-    cmd="qsub -terse -j y -o $logfile -b y -l h_vmem=8G\
-            $pythonexec $scriptdir/GBMsurvival_report.py \
+    cmd="$pythonexec $scriptdir/GBMsurvival_report.py \
             -n '$experimentName' \
 	    -t $t1 \
             -c $t1ce \
@@ -528,12 +543,10 @@ if [ ! -f $fout ]; then
 	    -s $seg \
             --segtype $segtype \
 	    $reportoption \
-            --modeldir $scriptdir/data/model \
+            --modeldir $scriptdir/data \
 	    -o $outdir"
     echoV "\n$cmd"
-    jid=$($cmd)
-    echoV "jid: $jid"
-    while [ -n "`qstat | grep $jid`" ]; do sleep 2m; done
+    $cmd > $logfile
 fi
 if [ ! -f $fout ]; then
     echo -e "\nWriting report failed"

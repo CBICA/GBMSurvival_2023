@@ -59,6 +59,14 @@ exit_if_not_exist()
         exit 1;
     fi;
 }
+exit_if_not_exist_dir()
+{
+    file="$1";
+    if [ ! -d "${file}" ]; then
+        echo -e "\nfolder (${file}) does not exist. Exiting.";
+        exit 1;
+    fi;
+}
 
 exit_if_exist()
 {
@@ -332,7 +340,6 @@ exit_if_not_exist "${greedy_executable}";
 
 
 #output to log file relevant arguments
-echo_common_script_arguments;
 echo -e "input:\t(${input})";
 echo -e "atlas:\t(${atlas})";
 echo -e "outdir:\t(${outdir})";
@@ -354,6 +361,10 @@ echo -e "############### start processing ################"
 echo -e ""
 
 #processing 1: copy files to tmpdir
+
+tmpdir=$outdir/tmp
+mkdir -pv $tmpdir
+
 echo -e "\n---> copying input files to tmpdir ($tmpdir)"; #in order to not expose path to user when using ipp
 
 cmd="cp -L $input $tmpdir/input.nii.gz"

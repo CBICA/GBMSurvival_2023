@@ -451,16 +451,16 @@ def main(argv):
         dffe.loc[dffe['Feature value']<dffe['ReSPOND.min'],'Flag']="L"    
         
         dffe_styled=dffe.style.set_table_styles([dict(selector="th",props=[('max-width', '300px')])])
-        dfi.export(dffe_styled,'%s/features_table.png'%outdir,table_conversion = 'matplotlib')
-        #    dfi.export(dffe_styled,'%s/features_table.png'%outdir)
+        #dfi.export(dffe_styled,'%s/features_table.png'%outdir,table_conversion = 'matplotlib')
+        dfi.export(dffe_styled,'%s/features_table.png'%outdir)
         
         ### get list of Flag L and H
         dffe_flag=dffe[dffe.Flag!=" "][['Feature name','Flag']]
         if len(dffe_flag) > 0:
             hasflagged=1
             dffe_styled=dffe_flag.style.set_table_styles([dict(selector="th",props=[('max-width', '300px')])])
-            dfi.export(dffe_styled,'%s/features_table_flag.png'%outdir,table_conversion = 'matplotlib')
-            #dfi.export(dffe_styled,'%s/features_table_flag.png'%outdir)    
+            #dfi.export(dffe_styled,'%s/features_table_flag.png'%outdir,table_conversion = 'matplotlib')
+            dfi.export(dffe_styled,'%s/features_table_flag.png'%outdir)    
     
         dfstage=pd.read_csv(resultcsv,index_col=False)    
         stage=dfstage['stage'][0]
