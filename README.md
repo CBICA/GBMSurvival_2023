@@ -6,21 +6,23 @@ This repository includes the source codes to evaluate the survival model describ
 
 ### Code description
 
-- src/run_GBMsurvival_predict.sh: Main code to extract features from images and apply the pretrained model.
-Inputs are patient age, preprocessed MRI images (t1,t1gd,t2,t2-flair) and the tumor segmentation mask. 
-
+- src/run_GBMsurvival_predict.sh: Main bash code to extract features from images and apply the pretrained model.
+Inputs are patient age, preprocessed MRI images (t1,t1gd,t2,t2-flair), and tumor segmentation mask. 
 
 - src/FeatEx.m : function to extract features
 
-- src/GBMSurvival_predict.m : matlab code to extract featuers and run predictions
+- src/GBMSurvival_predict.m : matlab fuction to run predictions
 
-- src/data: folder including model and atlas
-- src/libs: folder including matlab libraries
+- src/data: model and atlases
+- src/libs: matlab libraries
 
-software requirements
+### Software requirements
 
 - MATLAB version 9.4 (R2018a)
+
 - greedy: https://github.com/pyushkevich/greedy [1]
+
+- python3 for pdf report creation
 
 
 ### Online platform
@@ -32,7 +34,7 @@ In addition to making the source codes available here, we have created an online
 
 ### Image preprocessing
 
-Codes for the image preprocessing are available through GitHub
+Codes for the image preprocessing are available separately through the following GitHub repositories
 - dicom to nifti conversion and image co-registration (with optional brain extraction and  tumor segmentation): https://github.com/CBICA/CaPTk [2]
 
 - Brain extraction: https://github.com/CBICA/BrainMaGe [3]
