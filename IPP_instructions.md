@@ -8,15 +8,13 @@
 1.	Enter the input and click on the **Submit Job** button.
 
 1.	Required fields:
-  -	User description: The text input in this field will be displayed in the output results report. It is not a model input.
-  -	Age of patient in year
-  -	Image input type (see image input below)
-  -	T1, T1-POST, T2, T2-FLAIR image input. This can be either a
-    -	DICOM series (upload all files per series) (Input type 1)
-    -	Un-preprocessed NIfTI (Input type 1)
-    -	BraTS pipeline preprocessed NIfTI in SRI space (co-registered, skull-stripped) (input type 2)
-
-    
+    -	User description: The text input in this field will be displayed in the output results report. It is not a model input.
+    -	Age of patient in year
+    -	Image input type (see image input below)
+    -	T1, T1-POST, T2, T2-FLAIR image input. This can be either a
+        -	DICOM series (upload all files per series) (Input type 1)
+        -	Un-preprocessed NIfTI (Input type 1)
+        -	BraTS pipeline preprocessed NIfTI in SRI space (co-registered, skull-stripped) (input type 2)
 
 1.	Optional parameters:
     -	Series to use for BrainMAGE brain mask [T1 or T1-POST]: By default, the software will use the T1-POST image to create the brain mask. When the T1-POST image is cropped, the pipeline will benefit from using the T1 mask.
