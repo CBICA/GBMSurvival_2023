@@ -2,18 +2,22 @@
 
 
 This repository includes the source codes to evaluate the survival model described in our paper
-"Novel ML-based Prognostic Subgrouping of Glioblastoma: A Multi-center Study", submitted to Nature Medicine.
+"Novel ML-based Prognostic Subgrouping of Glioblastoma: A Multi-center Study", submitted to Nature Medicine, NMED-A124673.
 
 ### Code description
-
-- src/run_GBMsurvival_predict.sh: Main bash code to extract features from images and apply the pretrained model.
-Inputs are patient age, preprocessed MRI images (t1,t1gd,t2,t2-flair), and tumor segmentation mask. 
 
 - src/FeatEx.m : function to extract features
 
 - src/GBMSurvival_predict.m : matlab fuction to run predictions
 
+- src/run_GBMsurvival_predict.sh: Bash wrapper to extract features from images, apply the pretrained model, and output a report.
+Inputs are patient age, preprocessed MRI images (t1,t1gd,t2,t2-flair), and tumor segmentation mask. 
+
+
 - src/data: model and atlases
+  - Atlas_Sur_NatMed.nii.gz: The 4th 3D channel includes the Overall Survival Map (OSM) atlas described in the manuscript.
+  - jakob_stripped_with_cere_lps_256256128.nii.gz: common atlas where all images are deformed to
+  - templateallregions.nii.gz: segmentation labels of the common atlas
 - src/libs: matlab libraries
 
 ### Software requirements
@@ -22,20 +26,22 @@ Inputs are patient age, preprocessed MRI images (t1,t1gd,t2,t2-flair), and tumor
 
 - greedy: https://github.com/pyushkevich/greedy [1]
 
-- python3 for pdf report creation
+- python3: For pdf report creation. Dependencies in src/python_dependencies
 
 
 ### Online platform
 In addition to making the source codes available here, we have created an online platform where users can preprocess and apply our model on their own images to obtain survival prediction without the need for installation.
 
-- https://ipp.cbica.upenn.edu
+- [CBICA Image Processing Portal link](https://ipp.cbica.upenn.edu)
 
 - Sample input data from the public dataset UPENN-GBM (https://doi.org/10.7937/TCIA.709X-DN49) and output report are available in the folder sample_data
+
+- Step-by-step instructions can be found [here](IPP_instructions.md). 
 
 ### Image preprocessing
 
 Codes for the image preprocessing are available separately through the following GitHub repositories
-- dicom to nifti conversion and image co-registration (with optional brain extraction and  tumor segmentation): https://github.com/CBICA/CaPTk [2]
+- Preprocessing pipeline (dicom to nifti conversion, image co-registration to the SRI atlas, and ptional brain extraction and tumor segmentation): https://github.com/CBICA/CaPTk [2]
 
 - Brain extraction: https://github.com/CBICA/BrainMaGe [3]
 
