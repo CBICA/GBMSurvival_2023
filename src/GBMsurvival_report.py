@@ -140,15 +140,14 @@ def main(argv):
             
     festats_respond=modeldir+'/Features_2293_stats.csv'
     kmcurve=modeldir+'/KMv5.png'
-    stagingatlas=modeldir+'/Atlas_Staging_forIPP_20220819.nii.gz'
     spi_sur=modeldir+'/SPI_SUR.csv'
 
-    stagingatlas1=modeldir+'/Atlas_Sur_NatMed.nii.gz'
+    osmatlas1=modeldir+'/Atlas_Sur_NatMed.nii.gz'
     #default:
     hasflagged=0;
 
     
-    for f in [t1,t1ce,t2,flair,seg,festats_respond,kmcurve,stagingatlas]:
+    for f in [t1,t1ce,t2,flair,seg,festats_respond,kmcurve,osmatlas1]:
         if not os.path.isfile(f):
             print("\nError: Input file (%s) not found"%f)
             exit()
@@ -178,7 +177,7 @@ def main(argv):
     if flag_noTC==0: 
         imgseg_tcinatlas=nib.load(seg_tcinatlas).get_fdata()
     
-    imgatlas=nib.load(stagingatlas1).get_fdata()
+    imgatlas=nib.load(ocmatlas1).get_fdata()
     imgatlas_iqar=imgatlas[:,:,:,3]
     
     # get slice of largest tumor core
@@ -557,7 +556,6 @@ def main(argv):
             self.cell(0, 10, 'Page ' + str(self.page_no()) + '  - CBICA IPP output, ' + str(today), 0, 0, 'C')
             
     # Global Variables
-    #TITLE = "GBM Survival Prediction, ReSPOND 2022 model"
     TITLE = "Novel ML-based Prognostic Subgrouping of Glioblastoma:\nReSPOND 2022 model"
     #WIDTH = 210
     #HEIGHT = 297
