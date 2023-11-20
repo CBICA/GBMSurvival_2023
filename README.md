@@ -2,7 +2,7 @@
 
 
 This repository includes the source codes to evaluate the survival model described in our paper
-"Novel ML-based Prognostic Subgrouping of Glioblastoma: A Multi-center Study", submitted to Nature Medicine, NMED-A124673.
+"Novel ML-based Prognostic Subgrouping of Glioblastoma: A Multi-center Study"
 
 ### Code description
 
