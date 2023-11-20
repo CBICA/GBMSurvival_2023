@@ -1,4 +1,4 @@
-# GBMSurvival_2023NatureMedicine
+# GBMSurvival_2023
 
 
 This repository includes the source codes to evaluate the survival model described in our paper
